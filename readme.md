@@ -21,6 +21,12 @@ npx create-wp-release
 
 ## Usage
 
+Release a new version of your WordPress plugins or just update the `Tested up to` WordPress version.
+
+- `--latest`, `-l` Update to latest WordPress version.
+- `--custom`, `-c` Update to a custom WordPress version.
+- `--tag`,    `-t` Release a new version of the WordPress plugin.
+
 ```sh
 # Interactive mode: Asks questions.
 npx create-wp-release
@@ -34,6 +40,10 @@ npx create-wp-release -l
 # 2. Set a custom version to as the "Tested up to" version (e.g. setting 5.4.0 before its release).
 npx create-wp-release --custom 5.4.0
 npx create-wp-release -c 5.4.0
+
+# 3. Release a new version of the WordPress plugin.
+npx create-wp-release --tag 2.5.0
+npx create-wp-release -t 2.5.0
 
 # Help/usage.
 npx create-wp-release --help

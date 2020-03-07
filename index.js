@@ -10,13 +10,14 @@ process.on('unhandledRejection', err => {
 const meow = require('meow');
 const cliA11y = require('cli-a11y');
 const logSymbols = require('log-symbols');
-const semverValid = require('semver/functions/valid');
 const promptClone = require('./utils/promptClone.js');
 const promptCustom = require('./utils/promptCustom.js');
 const printCurrentVersion = require('./utils/printCurrentVersion.js');
+const verValid = require('./utils/verValid.js');
 const getCustomVersion = require('./utils/getCustomVersion.js');
 const setVersion = require('./utils/setVersion.js');
 const getWPVersion = require('./utils/getWPVersion.js');
+const setPluginVersion = require('./utils/setPluginVersion.js');
 const updateNotifier = require('update-notifier');
 const pkgJSON = require('./package.json');
 const handleError = require('cli-handle-error');
@@ -33,6 +34,7 @@ const cli = meow(
 	Options
 	  --latest, -l  Update to latest WordPress version.
 	  --custom, -c  Update to a custom WordPress version.
+	  --tag,    -t  Release a new version of the WordPress plugin.
 
 	Example
 	  ${green(`create-wp-release`)}
@@ -50,6 +52,10 @@ const cli = meow(
 			custom: {
 				type: 'string',
 				alias: 'c'
+			},
+			tag: {
+				type: 'string',
+				alias: 't'
 			}
 		}
 	}
@@ -58,7 +64,9 @@ const cli = meow(
 (async () => {
 	welcome(
 		`create-wp-release`,
-		`by Awais.dev\n${dim(`Stargaze the repo for updates ↓\nhttps://github.com/ahmadawais/create-wp-release`)}`,
+		`by Awais.dev\n${dim(
+			`Stargaze the repo for updates ↓\nhttps://github.com/ahmadawais/create-wp-release`
+		)}`,
 		{
 			bgColor: `#d54e21`,
 			color: `#FFFFFF`,
@@ -73,6 +81,7 @@ const cli = meow(
 	}).notify({ isGlobal: true });
 	const latest = cli.flags.latest;
 	const customVersion = cli.flags.custom;
+	const tag = cli.flags.tag;
 
 	// Power mode.
 	if (latest) {
@@ -83,16 +92,17 @@ const cli = meow(
 
 	if (customVersion) {
 		await printCurrentVersion();
-		const isValid = semverValid(customVersion) ? true : false;
-		if (!isValid) {
-			console.log(`${logSymbols.error} Enter a vaild version. E.g. major.minor.patch i.e. 5.3.2\n`);
-			process.exit(0);
-		}
+		await verValid(customVersion);
 		await setVersion(customVersion);
 	}
 
+	if (tag) {
+		await verValid(tag);
+		await setPluginVersion(tag);
+	}
+
 	// Interactive mode.
-	if (!latest && !customVersion) {
+	if (!latest && !customVersion && !tag) {
 		cliA11y({ toggle: true });
 		await promptClone();
 		await printCurrentVersion();
@@ -110,8 +120,10 @@ const cli = meow(
 	}
 
 	console.log(
-		`${logSymbols.success} ${green(`All done!`)}\n\n${logSymbols.info} ${dim(`Tip: Check out `)}${green(
-			`wp-continous-deployment`
-		)}\n${dim(`https://github.com/ahmadawais/wp-continuous-deployment`)}\n`
+		`${logSymbols.success} ${green(`All done!`)}\n\n${logSymbols.info} ${dim(
+			`Tip: Check out `
+		)}${green(`wp-continous-deployment`)}\n${dim(
+			`https://github.com/ahmadawais/wp-continuous-deployment`
+		)}\n`
 	);
 })();

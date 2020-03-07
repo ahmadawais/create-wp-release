@@ -6,11 +6,11 @@ const chalk = require('chalk');
 const yellow = chalk.bold.yellow;
 const green = chalk.bold.green;
 const { getValue } = require('wp-file-header-metadata');
+const getHeaderFile = require('./getHeaderFile.js');
 
 module.exports = async () => {
-	spinner.start(`${yellow(`CURRENT`)} version of "Tested up to"…`);
-	const version = await getValue('Tested up to', 'readme.txt');
-	const currentVersion = semverValid(semverCoerce(version));
-	spinner.succeed(`${green(`CURRENT`)} version of "Tested up to": ${green(currentVersion)}`);
-	return currentVersion;
+	const filename = await getHeaderFile();
+	const version = await getValue('Version', filename);
+	const validVersion = semverValid(semverCoerce(version));
+	return validVersion;
 };
