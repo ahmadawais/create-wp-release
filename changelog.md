@@ -29,19 +29,11 @@ I have released a video course to help you become a better developer — <a href
 
 <br>
 
-### RELEASE: 0.1.0
+### RELEASE: 0.2.0
 
 ![📦 NEW:](https://img.shields.io/badge/-NEW-gray.svg?colorB=3778FF)
 
-> 📦 First commit [`314ae9c`](https://github.com/ahmadawais/create-wp-release/commit/314ae9c2457e5c0238c9b0cc9147d52bb0e8a15b) <br>
-> 📦 Power Mode [`0dc37cb`](https://github.com/ahmadawais/create-wp-release/commit/0dc37cb2703c1ffbd8393b3676e82e089a56d716) <br>
-> 📦 First version [`f0b01cf`](https://github.com/ahmadawais/create-wp-release/commit/f0b01cf83225714629a22dd6a2282e024dbbc17a) <br>
-> 📦 Tip [`0ed5999`](https://github.com/ahmadawais/create-wp-release/commit/0ed5999e3516259b166039c4240eb5b9c130c0f3) <br>
-> 📦 Final print [`6a438c5`](https://github.com/ahmadawais/create-wp-release/commit/6a438c53c85c4da9b47a900ca2f28f9145c43a4a) <br>
-
-![📖 DOC:](https://img.shields.io/badge/-DOCS-gray.svg?colorB=978CD4)
-
-> 📖 Usage [`00a1c23`](https://github.com/ahmadawais/create-wp-release/commit/00a1c237f830af56d2a9056f2dddbf9caf58ca0e) <br>
+> 📦 First version [`ffeeb0d`](https://github.com/ahmadawais/create-wp-release/commit/ffeeb0d1cfa3229cde319cc262792cdc3d67f681) <br>
 
 <br>
 
